@@ -1,0 +1,25 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load sample data
+data = pd.read_csv("sample_lifestyle.csv")
+
+# Extract columns
+exercise = data['Exercise_hours_per_week']
+bmi = data['BMI']
+
+# Compute basic statistics
+print("Exercise stats:", exercise.describe())
+print("BMI stats:", bmi.describe())
+
+# Create scatterplot
+plt.scatter(exercise, bmi, color='blue')
+plt.xlabel("Exercise Hours per Week")
+plt.ylabel("BMI")
+plt.title("Exercise vs BMI")
+plt.grid(True)
+plt.show()
+
+# Compute correlation
+correlation = exercise.corr(bmi)
+print("Correlation between exercise and BMI:", correlation)
