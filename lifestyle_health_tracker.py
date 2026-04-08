@@ -19,12 +19,13 @@ print(exercise.describe())
 print("\nBMI stats:")
 print(bmi.describe())
 
-# Step 5: Scatterplot
 plt.scatter(exercise, bmi)
 plt.xlabel("Exercise Hours per Week")
 plt.ylabel("BMI")
 plt.title("Exercise vs BMI")
-plt.show()
+
+plt.savefig("exercise_vs_bmi.png")
+print("Plot saved as exercise_vs_bmi.png")
 
 # Step 6: Correlation
 correlation = exercise.corr(bmi)
