@@ -1,0 +1,117 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+# Load and clean data
+def load_data(filename):
+    try:
+        data = pd.read_csv(filename)
+    except FileNotFoundError:
+        print("Error: File not found.")
+        exit()
+
+    # Check required columns
+    required_cols = ["Exercise_hours_per_week", "BMI", "Sleep_hours_per_night"]
+    for col in required_cols:
+        if col not in data.columns:
+            raise ValueError(f"Missing required column: {col}")
+
+    # Handle missing data
+    data["Exercise_hours_per_week"] = data["Exercise_hours_per_week"].fillna(0)
+    data["BMI"] = data["BMI"].fillna(data["BMI"].mean())
+    data["Sleep_hours_per_night"] = data["Sleep_hours_per_night"].fillna(data["Sleep_hours_per_night"].mean())
+
+    return data
+
+
+
+# Analyze data
+def analyze_data(data):
+    exercise = data["Exercise_hours_per_week"]
+    bmi = data["BMI"]
+    sleep = data["Sleep_hours_per_night"]
+
+    print("\n--- DATASET PREVIEW ---")
+    print(data)
+
+    print("\n--- EXERCISE STATS ---")
+    print(exercise.describe())
+
+    print("\n--- BMI STATS ---")
+    print(bmi.describe())
+
+    print("\n--- SLEEP STATS ---")
+    print(sleep.describe())
+
+    # Correlations
+    exercise_corr = exercise.corr(bmi)
+    sleep_corr = sleep.corr(bmi)
+
+    print("\n--- CORRELATIONS ---")
+    print(f"Exercise vs BMI: {exercise_corr}")
+    print(f"Sleep vs BMI: {sleep_corr}")
+
+    # Interpret correlations
+    print("\n--- INTERPRETATION ---")
+
+    interpret_correlation(exercise_corr, "exercise and BMI")
+    interpret_correlation(sleep_corr, "sleep and BMI")
+
+    # Interpret BMI category
+    avg_bmi = bmi.mean()
+    print(f"\nAverage BMI: {avg_bmi:.2f}")
+
+    if avg_bmi < 18.5:
+        print("Average BMI is underweight.")
+    elif avg_bmi < 25:
+        print("Average BMI is in the healthy range.")
+    elif avg_bmi < 30:
+        print("Average BMI is overweight.")
+    else:
+        print("Average BMI is in the obese range.")
+
+    return exercise, sleep, bmi
+
+
+# Interpretation helper
+def interpret_correlation(corr, label):
+    if corr > 0.5:
+        print(f"There is a strong positive relationship between {label}.")
+    elif corr < -0.5:
+        print(f"There is a strong negative relationship between {label}.")
+    else:
+        print(f"There is a weak or no clear relationship between {label}.")
+
+
+# Plotting
+def plot_data(exercise, sleep, bmi):
+    # Exercise vs BMI
+    plt.figure()
+    plt.scatter(exercise, bmi)
+    plt.xlabel("Exercise Hours per Week")
+    plt.ylabel("BMI")
+    plt.title("Exercise vs BMI")
+    plt.savefig("exercise_vs_bmi.png")
+
+    # Sleep vs BMI
+    plt.figure()
+    plt.scatter(sleep, bmi)
+    plt.xlabel("Sleep Hours per Night")
+    plt.ylabel("BMI")
+    plt.title("Sleep vs BMI")
+    plt.savefig("sleep_vs_bmi.png")
+
+    print("\nPlots saved as:")
+    print("- exercise_vs_bmi.png")
+    print("- sleep_vs_bmi.png")
+
+# Main function
+def main():
+    data = load_data("sample_lifestyle.csv")
+    exercise, sleep, bmi = analyze_data(data)
+    plot_data(exercise, sleep, bmi)
+
+
+# Run the program
+if __name__ == "__main__":
+    main()
