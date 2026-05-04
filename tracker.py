@@ -2,9 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-# ---------------------------
+
 # Load and clean data
-# ---------------------------
 def load_data(filename):
     try:
         data = pd.read_csv(filename)
@@ -26,9 +25,7 @@ def load_data(filename):
     return data
 
 
-# ---------------------------
 # Add user input (NEW FEATURE)
-# ---------------------------
 def add_user_entry(data):
     print("\n--- Add New Entry ---")
 
@@ -77,9 +74,7 @@ def add_user_entry(data):
     return data
 
 
-# ---------------------------
 # Interpret correlation
-# ---------------------------
 def interpret_correlation(corr, label):
     if corr > 0.5:
         print(f"There is a strong positive relationship between {label}.")
@@ -89,9 +84,7 @@ def interpret_correlation(corr, label):
         print(f"There is a weak or no clear relationship between {label}.")
 
 
-# ---------------------------
 # Analyze data
-# ---------------------------
 def analyze_data(data):
     print("\nHere is the dataset:")
     print(data)
@@ -138,9 +131,7 @@ def analyze_data(data):
     return exercise, sleep, bmi
 
 
-# ---------------------------
 # Plot data
-# ---------------------------
 def plot_data(exercise, sleep, bmi):
     # Exercise vs BMI
     plt.figure()
