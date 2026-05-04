@@ -112,9 +112,9 @@ It also prints:
 
 
 ## Acknowledgments
+* I used AI to correct my code for adding timestamp tracking using 'satetime' and reviewed and tested it myself so that I understood it.
 
 * Libraries used:
-
   * pandas
   * matplotlib
 
