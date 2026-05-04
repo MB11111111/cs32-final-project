@@ -1,6 +1,7 @@
-Name,Exercise_hours_per_week,BMI,Sleep_hours_per_night
-Alice,3,22.5,7
-Bob,1,27.3,5
-Charlie,5,24.0,6
-Dana,0,30.1,4
-Eli,4,23.5,8
+Name,Exercise_hours_per_week,BMI,Sleep_hours_per_night,Date
+Alice,3.0,22.5,7.0,2026-04-01 10:00:00
+Bob,1.0,27.3,5.0,2026-04-02 11:30:00
+Charlie,5.0,24.0,6.0,2026-04-03 09:15:00
+Dana,0.0,30.1,4.0,2026-04-04 08:45:00
+Eli,4.0,23.5,8.0,2026-04-05 12:00:00
+john,15.0,30.0,6.0,2026-05-04 09:28:30
