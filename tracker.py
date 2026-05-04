@@ -17,7 +17,7 @@ def load_data(filename):
         if col not in data.columns:
             raise ValueError(f"Missing required column: {col}")
 
-    # Handle missing data
+    # Handle missing data-- fill missing values so program can sitll run with incomplete data
     data["Exercise_hours_per_week"] = data["Exercise_hours_per_week"].fillna(0)
     data["BMI"] = data["BMI"].fillna(data["BMI"].mean())
     data["Sleep_hours_per_night"] = data["Sleep_hours_per_night"].fillna(data["Sleep_hours_per_night"].mean())
@@ -31,7 +31,7 @@ def add_user_entry(data):
 
     name = input("Enter name: ")
 
-    # Input validation
+    # Input validation 
     while True:
         try:
             exercise = float(input("Enter exercise hours per week: "))
@@ -154,9 +154,8 @@ def plot_data(exercise, sleep, bmi):
     print("sleep_vs_bmi.png")
 
 
-# ---------------------------
+
 # Main program
-# ---------------------------
 def main():
     data = load_data("sample_lifestyle.csv")
 
